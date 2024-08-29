@@ -29,3 +29,11 @@ def login():
         return jsonify({"msg":"usuario o contraseña no validos"})
     access_token = create_access_token(identity=user.serialize())
     return jsonify({"token":access_token})
+
+@api.route("/register", methods=["POST"])
+def register():
+    body = request.json
+    user = User()
+    new_user = user.create_user(email=body["email"], password=body["password"])
+    print(new_user)
+    return jsonify({"msg":"Usuario creado"})
