@@ -7,7 +7,7 @@ export const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/register', {
+    const response = await fetch(process.env.BACKEND_URL + "/api/register", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
