@@ -12,7 +12,8 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 
-@api.route('/hello', methods=['POST', 'GET'])
+@api.route('/hello', methods=['GET'])
+@jwt_required()
 def handle_hello():
 
     response_body = {
@@ -25,10 +26,12 @@ def handle_hello():
 def login():
     body = request.json
     user = User.query.filter_by(email=body["email"]).first()
-    if not user:
-        return jsonify({"msg":"usuario o contraseña no validos"})
-    access_token = create_access_token(identity=user.serialize())
-    return jsonify({"token":access_token})
+    
+    if user and user.check_password(password=body["password"]):
+        access_token = create_access_token(identity=user.serialize())
+        return jsonify({"token":access_token})
+    else:    
+        return jsonify({"msg":"credenciales incorrectas"}), 401
 
 @api.route("/register", methods=["POST"])
 def register():
