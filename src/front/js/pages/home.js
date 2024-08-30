@@ -21,7 +21,7 @@ export const Home = () => {
 			<div>
 			<i className="fa-solid fa-circle-user user-icon"></i>
 			</div>
-			<button type="button" className="btn btn-primary btn-lg m-3" onClick={goToSignup}>Register</button>
+			<button type="button" className="btn btn-primary btn-lg m-3" onClick={goToSignup}>Registro</button>
 			<button type="button" className="btn btn-primary btn-lg m-3" onClick={goToLogin}>Login</button>
 			
 			
