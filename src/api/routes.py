@@ -33,10 +33,17 @@ def login():
     else:    
         return jsonify({"msg":"credenciales incorrectas"}), 401
 
-@api.route("/register", methods=["POST"])
+@api.route('/register', methods=['POST'])
 def register():
     body = request.json
-    user = User()
-    new_user = user.create_user(email=body["email"], password=body["password"])
-    print(new_user)
-    return jsonify({"msg":"Usuario creado"})
+    if not body.get("email") or not body.get("password"):
+        return jsonify({"msg": "Faltan datos"}), 400
+
+    if User.query.filter_by(email=body["email"]).first():
+        return jsonify({"msg": "El usuario ya existe"}), 400
+
+    try:
+        new_user = User.create_user(email=body["email"], password=body["password"])
+        return jsonify({"msg": "Usuario creado exitosamente"}), 201
+    except Exception as e:
+        return jsonify({"msg": str(e)}), 500
