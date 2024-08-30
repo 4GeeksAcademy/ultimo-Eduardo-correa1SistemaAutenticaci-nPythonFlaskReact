@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "../../styles/index.css";
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,8 +27,9 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Inicio de Sesión</h2>
+    <div className='text-center mt-5'>
+      <i className="fa-solid fa-circle-user user-icon"></i>
+      <h2>Inicia Sesión</h2>
       {error && <p style={{color: 'red'}}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
