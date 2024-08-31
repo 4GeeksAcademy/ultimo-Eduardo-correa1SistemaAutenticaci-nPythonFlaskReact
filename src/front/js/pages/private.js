@@ -14,8 +14,7 @@ export const Private = () => {
 
   return (
     <div>
-      <h2>Bienvenido a la página privada</h2>
-      {/* Aquí puedes renderizar más contenido privado */}
+      <h2>Bienvenido a la página privada!</h2>      
     </div>
   );
 };
